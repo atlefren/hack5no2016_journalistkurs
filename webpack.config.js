@@ -3,7 +3,8 @@ var path = require('path');
 module.exports = {
     entry: {
         wxs: './src/wxs.js',
-        cesium: './src/cesium'
+        cesium: './src/cesium',
+        leaflet_flickr: './src/leaflet-flickr'
     },
     output: {
         path: path.join(__dirname, 'bundles'),
