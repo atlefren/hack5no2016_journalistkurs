@@ -3,7 +3,7 @@ var path = require('path');
 module.exports = {
     entry: {
         wxs: './src/wxs.js',
-        cesium: './src/cesium.js'
+        cesium: './src/cesium'
     },
     output: {
         path: path.join(__dirname, 'bundles'),
