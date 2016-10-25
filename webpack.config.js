@@ -2,12 +2,14 @@ var path = require('path');
 
 module.exports = {
     entry: {
-        wxs: './src/wxs.js'
+        wxs: './src/wxs.js',
+        cesium: './src/cesium.js'
     },
     output: {
         path: path.join(__dirname, 'bundles'),
         filename: '[name].bundle.js',
-        publicPath: '/bundles/'
+        publicPath: '/bundles/',
+        sourcePrefix: ''
     },
      resolve: {
         extensions: ['', '.js'],
@@ -15,6 +17,7 @@ module.exports = {
     },
     module: {
         loaders: [
+            {test: /Cesium\.js$/, loader: 'script'},
             {
                 test: /.js$/,
                 loader: 'babel-loader',
@@ -23,7 +26,12 @@ module.exports = {
                     presets: ['es2015']
                 }
             },
-            {test: /\.json$/, loader: 'json-loader'}
+            {test: /\.json$/, loader: 'json-loader'},
+            {test: /\.css$/, loader: 'style!css'},
+            {
+                test: /\.(png|gif|jpg|jpeg)$/,
+                loader: 'file-loader'
+            }
         ]
     }
 };
