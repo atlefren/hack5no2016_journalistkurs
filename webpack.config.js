@@ -5,7 +5,8 @@ module.exports = {
         wxs: './src/wxs.js',
         cesium: './src/cesium',
         leaflet_flickr: './src/leaflet-flickr',
-        d3: './src/d3'
+        d3: './src/d3',
+        leaflet_carto: './src/leaflet_carto'
     },
     output: {
         path: path.join(__dirname, 'bundles'),
