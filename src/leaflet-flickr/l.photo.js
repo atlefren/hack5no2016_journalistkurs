@@ -1,3 +1,7 @@
+/*global L:false*/
+
+//adapted from https://github.com/turban/Leaflet.Photo
+
 L.Photo = L.FeatureGroup.extend({
     options: {
         icon: {

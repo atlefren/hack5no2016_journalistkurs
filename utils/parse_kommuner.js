@@ -6,31 +6,29 @@ var sosidata = fs.readFileSync('../data/ADM_enheter_Norge.sos');
 
 var parser = new SOSI.Parser();
 
-
-
-
 var filter = function (feature) {
     return feature.attributes.objekttypenavn === 'Kommune';
 };
 
 var mapAttributes = function (prevAttributes) {
     return {
-        komm: prevAttributes.KOMMUNENUMMER
+        komm: prevAttributes.KOMMUNENUMMER,
+        navn: prevAttributes.ADMENHETNAVN.navn
     };
 };
 
 var data = parser
     .parse(sosidata)
     .transform('EPSG:4326')
-    .filter(filter);
-    //.mapAttributes(mapAttributes)
+    .filter(filter)
+    .mapAttributes(mapAttributes);
 
-console.log('done filter')
+var geojson = data.dumps('geojson');
 
-var topojson = data.dumps('topojson');
-
-fs.writeFile('../data/kommuner.topojson', JSON.stringify(data), function (err) {
+fs.writeFile('../data/kommuner.geojson', JSON.stringify(geojson), function (err) {
     if (err) {
         return console.log(err);
     }
 });
+
+//then run topojson --id-property komm -p navn -o kommuner2.topojson kommuner.geojson

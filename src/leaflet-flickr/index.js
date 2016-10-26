@@ -28,8 +28,11 @@ L.latLngBounds.fromBBoxString = function (bbox) {
 };
 
 var bbox = '10.371974,63.421472,10.412850,63.431945';
+var bounds = L.latLngBounds.fromBBoxString(bbox);
 
-var map = L.map('map').fitBounds(L.latLngBounds.fromBBoxString(bbox));//setView([65.5, 17.0], 4);
+var map = L.map('map', {
+    maxBounds: bounds
+}).fitBounds(bounds);
 
 L.tileLayer.kartverket('norges_grunnkart').addTo(map);
 
