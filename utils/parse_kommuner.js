@@ -1,6 +1,7 @@
 var fs = require('fs');
 var SOSI = require('sosijs');
 var _ = require('underscore');
+var topojson = require('topojson');
 
 var sosidata = fs.readFileSync('../data/ADM_enheter_Norge.sos');
 
@@ -25,10 +26,20 @@ var data = parser
 
 var geojson = data.dumps('geojson');
 
-fs.writeFile('../data/kommuner.geojson', JSON.stringify(geojson), function (err) {
+var topology = topojson.topology({
+    kommuner: geojson,
+    id: function id(feature) {
+        return feature.id.properties.komm;
+    },
+    'property-transform': function propertyTransform(feature) {
+      return {
+        navn: feature.properties.navn
+      };
+    }
+});
+
+fs.writeFile('../data/kommuner.topojson', JSON.stringify(topology), function (err) {
     if (err) {
         return console.log(err);
     }
 });
-
-//then run topojson --id-property komm -p navn -o kommuner2.topojson kommuner.geojson

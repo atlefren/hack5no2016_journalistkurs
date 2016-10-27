@@ -46,7 +46,7 @@ var data = topojson.feature(kommuner, kommuner.objects.kommuner);
 // create a unit projection
 var projection = d3.geoAzimuthalEqualArea()
     .scale(1)
-    .rotate([-10, 0])
+    .rotate([-5, 0])
     /*.parallels([50, 70])
     .center([10, 60])
     .rotate([-15, 0])*/
